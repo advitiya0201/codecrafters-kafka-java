@@ -21,6 +21,10 @@ public class Main {
     } finally {
       try {
         if (clientSocket != null) {
+          String messageSize = "2";
+          String correlationId = "4";
+          String response = messageSize + correlationId;
+          clientSocket.getOutputStream().write(response.getBytes());
           clientSocket.close();
         }
       } catch (IOException e) {
@@ -28,10 +32,5 @@ public class Main {
       }
     }
     System.out.println("args[0] is: "+args[0]);
-    String messageSize = "2";
-    String correlationId = "4";
-    String response = messageSize + correlationId;
-    clientSocket.getOutputStream().write(response.getBytes());
-
   }
 }
