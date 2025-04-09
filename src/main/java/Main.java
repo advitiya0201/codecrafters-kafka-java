@@ -36,7 +36,8 @@ public class Main {
 //                    out.write(buf);
 //                    byte[] temp = new byte[4];
 //                    int bytesRead = in.read(temp, 0, 4);
-                    in.readInt();
+                    in.readInt(); //message size
+                    in.readInt(); //api_key & api_version
                     int ans = in.readInt();
                     System.out.println("Recd data is: "+ans);
                     dsOut.writeInt(ans);
