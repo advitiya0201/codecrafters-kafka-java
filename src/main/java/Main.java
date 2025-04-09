@@ -22,7 +22,7 @@ public class Main {
             try {
                 if (clientSocket != null) {
                     int messageSize = 0x00000000; //4 bytes
-                    int correlationId = 0x00000007;
+                    long correlationId = 0x00000007;
                     String response = String.valueOf(messageSize + correlationId);
                     clientSocket.getOutputStream().write(response.getBytes());
                     clientSocket.close();
