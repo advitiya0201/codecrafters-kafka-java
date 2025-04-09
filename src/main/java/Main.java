@@ -22,6 +22,7 @@ public class Main {
         } finally {
             try {
                 if (clientSocket != null) {
+                    //do not use BufferedReader becuause it is suitable for reading text only
 //                    BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                     DataInputStream in = new DataInputStream(clientSocket.getInputStream());
 //                    char[] buf = new char[32];
@@ -29,13 +30,14 @@ public class Main {
 //                    System.out.println(buf);
 //                    int messageSize = 4; //4 bytes
                     OutputStream out = clientSocket.getOutputStream();
-//                    out.write(new byte[] {0, 1, 2, 3});
+                    out.write(new byte[] {0, 1, 2, 3});
 //                    out.write(buf);
 //                    byte[] temp = new byte[4];
 //                    int bytesRead = in.read(temp, 0, 4);
                     in.readInt();
                     int ans = in.readInt();
                     System.out.println("Recd data is: "+ans);
+                    out.write(ans);
                     clientSocket.close();
                 }
             } catch (IOException e) {
