@@ -30,6 +30,8 @@ public class Main {
 //                    System.out.println(buf);
 //                    int messageSize = 4; //4 bytes
                     OutputStream out = clientSocket.getOutputStream();
+                    DataOutputStream dsOut = new DataOutputStream(clientSocket.getOutputStream());
+                    //we wrapped Output stream by DOS, so that we can use advance functionalities like out.writeInt()
                     out.write(new byte[] {0, 1, 2, 3});
 //                    out.write(buf);
 //                    byte[] temp = new byte[4];
@@ -37,7 +39,7 @@ public class Main {
                     in.readInt();
                     int ans = in.readInt();
                     System.out.println("Recd data is: "+ans);
-                    out.write(ans);
+                    dsOut.writeInt(ans);
                     clientSocket.close();
                 }
             } catch (IOException e) {
