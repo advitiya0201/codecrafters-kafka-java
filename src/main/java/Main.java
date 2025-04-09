@@ -25,8 +25,8 @@ public class Main {
                     int messageSize = 4; //4 bytes
                     int correlationId = 7;
                     OutputStream out = clientSocket.getOutputStream();
-                    out.write(messageSize);
-                    out.write(correlationId);
+                    out.write(new byte[] {0, 1, 2, 3});
+                    out.write(new byte[] {0, 0, 0, 7});
                     clientSocket.close();
                 }
             } catch (IOException e) {
