@@ -31,7 +31,8 @@ public class Main {
 //                    OutputStream out = clientSocket.getOutputStream();
 //                    out.write(new byte[] {0, 1, 2, 3});
 //                    out.write(buf);
-                    byte[] temp = in.readAllBytes();
+                    byte[] temp = new byte[32];
+                    int bytesRead = in.read(temp, 16, 32);
                     System.out.println("Recd data is: "+Arrays.toString(temp));
                     clientSocket.close();
                 }
@@ -39,6 +40,6 @@ public class Main {
                 System.out.println("IOException: " + e.getMessage());
             }
         }
-        System.out.println("args[1] is: " + args[1]);
+//        System.out.println("args[1] is: " + args[1]);
     }
 }
