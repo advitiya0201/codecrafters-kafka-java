@@ -28,12 +28,14 @@ public class Main {
 //                    int bytesRead = in.read(buf,16, 32);
 //                    System.out.println(buf);
 //                    int messageSize = 4; //4 bytes
-//                    OutputStream out = clientSocket.getOutputStream();
+                    OutputStream out = clientSocket.getOutputStream();
 //                    out.write(new byte[] {0, 1, 2, 3});
 //                    out.write(buf);
-                    byte[] temp = new byte[4];
-                    int bytesRead = in.read(temp, 5, 4);
-                    System.out.println("Recd data is: "+Arrays.toString(temp));
+//                    byte[] temp = new byte[4];
+//                    int bytesRead = in.read(temp, 0, 4);
+                    in.readInt();
+                    int ans = in.readInt();
+                    System.out.println("Recd data is: "+ans);
                     clientSocket.close();
                 }
             } catch (IOException e) {
