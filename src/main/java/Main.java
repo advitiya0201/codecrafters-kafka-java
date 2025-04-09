@@ -37,7 +37,7 @@ public class Main {
                     in.readInt();
                     int ans = in.readInt();
                     System.out.println("Recd data is: "+ans);
-                    out.write(ans);
+                    out.write((byte) ans);
                     clientSocket.close();
                 }
             } catch (IOException e) {
