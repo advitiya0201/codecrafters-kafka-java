@@ -3,7 +3,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Main {
-  public static void main(String[] args){
+  public static void main(String[] args) throws IOException {
     System.err.println("Logs from your program will appear here!");
 
     ServerSocket serverSocket = null;
@@ -27,7 +27,11 @@ public class Main {
         System.out.println("IOException: " + e.getMessage());
       }
     }
-    System.out.println("args[1] is: "+args[1]);
+    System.out.println("args[0] is: "+args[0]);
+    String messageSize = "2";
+    String correlationId = "4";
+    String response = messageSize + correlationId;
+    clientSocket.getOutputStream().write(response.getBytes());
 
   }
 }
