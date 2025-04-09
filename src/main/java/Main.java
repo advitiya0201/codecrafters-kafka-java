@@ -21,7 +21,7 @@ public class Main {
     } finally {
       try {
         if (clientSocket != null) {
-          String messageSize = "2";
+          String messageSize = "23"; //4 bytes
           String correlationId = "4";
           String response = messageSize + correlationId;
           clientSocket.getOutputStream().write(response.getBytes());
