@@ -1,5 +1,4 @@
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -22,11 +21,14 @@ public class Main {
         } finally {
             try {
                 if (clientSocket != null) {
+                    BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                    char[] buf = new char[32];
+                    int corelationId = in.read(buf,16, 32);
+                    System.out.println(corelationId);
                     int messageSize = 4; //4 bytes
-                    int correlationId = 7;
                     OutputStream out = clientSocket.getOutputStream();
                     out.write(new byte[] {0, 1, 2, 3});
-                    out.write(new byte[] {0, 0, 0, 7});
+                    out.write(corelationId);
                     clientSocket.close();
                 }
             } catch (IOException e) {
