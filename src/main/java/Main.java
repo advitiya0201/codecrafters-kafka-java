@@ -31,8 +31,8 @@ public class Main {
 //                    OutputStream out = clientSocket.getOutputStream();
 //                    out.write(new byte[] {0, 1, 2, 3});
 //                    out.write(buf);
-                    byte[] temp = new byte[32];
-                    int bytesRead = in.read(temp, 16, 32);
+                    byte[] temp = new byte[4];
+                    int bytesRead = in.read(temp, 5, 4);
                     System.out.println("Recd data is: "+Arrays.toString(temp));
                     clientSocket.close();
                 }
