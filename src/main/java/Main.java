@@ -27,5 +27,7 @@ public class Main {
         System.out.println("IOException: " + e.getMessage());
       }
     }
+    System.out.println("args[0] is: "+args[0]);
+
   }
 }
