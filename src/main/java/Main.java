@@ -1,7 +1,6 @@
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -22,7 +21,7 @@ public class Main {
         } finally {
             try {
                 if (clientSocket != null) {
-                    //do not use BufferedReader becuause it is suitable for reading text only
+                    //do not use BufferedReader because it is suitable for reading text only
 //                    BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                     DataInputStream in = new DataInputStream(clientSocket.getInputStream());
 //                    char[] buf = new char[32];
@@ -32,15 +31,21 @@ public class Main {
                     OutputStream out = clientSocket.getOutputStream();
                     DataOutputStream dsOut = new DataOutputStream(clientSocket.getOutputStream());
                     //we wrapped Output stream by DOS, so that we can use advance functionalities like out.writeInt()
-                    out.write(new byte[] {0, 1, 2, 3});
+                    out.write(new byte[] {0, 1, 2, 3}); //writing message size
 //                    out.write(buf);
 //                    byte[] temp = new byte[4];
 //                    int bytesRead = in.read(temp, 0, 4);
                     in.readInt(); //message size
-                    in.readInt(); //api_key & api_version
-                    int ans = in.readInt();
-                    System.out.println("Recd data is: "+ans);
-                    dsOut.writeInt(ans);
+                    //A Kafka request specifies the API its calling by using the request_api_key header field
+                    int apiKey =  in.readShort();
+                    int apiVersion = in.readShort();
+                    int corelationId = in.readInt();
+                    dsOut.writeInt(corelationId);
+                    if(apiVersion<0 || apiVersion>4) {
+                        System.out.println("Recd data is: "+ corelationId);
+                    } else {
+                        dsOut.writeInt(35);
+                    }
                     clientSocket.close();
                 }
             } catch (IOException e) {
