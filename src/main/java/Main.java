@@ -22,19 +22,11 @@ public class Main {
             try {
                 if (clientSocket != null) {
                     //do not use BufferedReader because it is suitable for reading text only
-//                    BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                     DataInputStream in = new DataInputStream(clientSocket.getInputStream());
-//                    char[] buf = new char[32];
-//                    int bytesRead = in.read(buf,16, 32);
-//                    System.out.println(buf);
-//                    int messageSize = 4; //4 bytes
                     OutputStream out = clientSocket.getOutputStream();
                     DataOutputStream dsOut = new DataOutputStream(clientSocket.getOutputStream());
                     //we wrapped Output stream by DOS, so that we can use advance functionalities like out.writeInt()
                     out.write(new byte[] {0, 1, 2, 3}); //writing message size
-//                    out.write(buf);
-//                    byte[] temp = new byte[4];
-//                    int bytesRead = in.read(temp, 0, 4);
                     in.readInt(); //message size
                     //A Kafka request specifies the API its calling by using the request_api_key header field
                     int apiKey =  in.readShort();
@@ -52,6 +44,5 @@ public class Main {
                 System.out.println("IOException: " + e.getMessage());
             }
         }
-//        System.out.println("args[1] is: " + args[1]);
     }
 }
