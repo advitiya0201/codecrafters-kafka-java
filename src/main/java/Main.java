@@ -44,7 +44,6 @@ public class Main {
                     dsOut.writeInt(corelationId);
                     if(apiVersion<0 || apiVersion>4) {
                         System.out.println("Recd data is: "+ corelationId);
-                    } else {
                         dsOut.writeShort(35);
                     }
                     clientSocket.close();
