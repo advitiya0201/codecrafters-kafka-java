@@ -39,12 +39,13 @@ public class Main {
                     //A Kafka request specifies the API its calling by using the request_api_key header field
                     int apiKey =  in.readShort();
                     int apiVersion = in.readShort();
+                    System.out.println("API version is: "+apiVersion);
                     int corelationId = in.readInt();
                     dsOut.writeInt(corelationId);
                     if(apiVersion<0 || apiVersion>4) {
                         System.out.println("Recd data is: "+ corelationId);
                     } else {
-                        dsOut.writeInt(35);
+                        dsOut.writeShort(35);
                     }
                     clientSocket.close();
                 }
